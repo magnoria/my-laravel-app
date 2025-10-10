@@ -78,19 +78,20 @@ return [
             'sslmode' => 'prefer',
         ],
 
-        'sqlsrv' => [
-            'driver' => 'sqlsrv',
-            'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', 'localhost'),
-            'port' => env('DB_PORT', '1433'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
-            'charset' => 'utf8',
-            'prefix' => '',
-            'prefix_indexes' => true,
-            // 'encrypt' => env('DB_ENCRYPT', 'yes'),
-            'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
+        'sqlsrv_secondary' => [ // 이 이름으로 MSSQL에 접근하게 됩니다.
+        'driver' => env('MSSQL_CONNECTION', 'sqlsrv'), // .env에서 sqlsrv를 가져옵니다.
+        'host' => env('MSSQL_HOST', 'localhost'),
+        'port' => env('MSSQL_PORT', '1433'),
+         'database' => env('MSSQL_DB_DATABASE', null),
+        // 🚨 username과 password를 null로 고정하여 Windows 인증 충돌을 방지합니다. 🚨
+        'username' => null, // env('MSSQL_DB_USERNAME', '') 대신 null로 고정
+        'password' => null, // env('MSSQL_DB_PASSWORD', '') 대신 null로 고정
+        'charset' => 'utf8',
+        'prefix' => '',
+        'prefix_indexes' => true,
+
+        // 🚨 Windows 인증을 위한 필수 설정 🚨
+        'windows_authentication' => true,
         ],
 
     ],
