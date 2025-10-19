@@ -12,6 +12,9 @@ namespace App\Http\Controllers;
 use App\Models\Post; // 모델 사용 선언
 use Illuminate\Http\Request; // 사용자 요청 처리 클래스 선언
 
+
+use App\Http\Controllers\Controller;// 상속을 위한 use 추가
+
 class PostController extends Controller // 컨트롤러를 상속받아야 laravel의 기본기능 미들웨어 처리, 응답처리등을 사용할 수 있음
 {
     // 1. 전체 게시글 목록 보기
@@ -25,7 +28,7 @@ class PostController extends Controller // 컨트롤러를 상속받아야 larav
         return view('posts.create');
     }
 
-    // 3. 데이터베이스에 새 글 저장
+    // 3. 데이터베이스에 새 글 저장 
     public function store(Request $request){
 
         $validated = $request->validate([
